@@ -39,6 +39,8 @@ const state: State = {
     locales: {},
     localizer: null,
     patreonCampaign: null,
+    artistToEntry: {},
+    topArtists: [],
 };
 
 export { state };

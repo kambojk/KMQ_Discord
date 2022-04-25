@@ -78,6 +78,10 @@ export interface State {
     locales: { [guildID: string]: LocaleType };
     localizer: LocalizationManager;
     patreonCampaign: Campaign;
+    artistToEntry: {
+        [artistNameOrAlias: string]: MatchedArtist;
+    };
+    topArtists: Array<MatchedArtist>;
 }
 
 export enum GameOption {

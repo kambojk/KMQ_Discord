@@ -1,3 +1,4 @@
+import Eris from "eris";
 import BaseCommand, { CommandArgs, Help } from "../interfaces/base_command";
 import {
     sendOptionsMessage,
@@ -77,6 +78,21 @@ export default class GroupsCommand implements BaseCommand {
         ],
         priority: 135,
     });
+
+    slashCommand = (): Array<Eris.ApplicationCommandStructure> => [
+        {
+            name: "groups",
+            description: "Play songs from the given groups.",
+            options: [...Array(25).keys()].map((x) => ({
+                name: `group_${x + 1}`,
+                description: "A group to play",
+                type: Eris.Constants.ApplicationCommandOptionTypes.STRING,
+                autocomplete: true,
+                required: x === 0,
+            })),
+            type: Eris.Constants.ApplicationCommandTypes.CHAT_INPUT,
+        },
+    ];
 
     call = async ({ message, parsedMessage }: CommandArgs): Promise<void> => {
         const guildPreference = await getGuildPreference(message.guildID);

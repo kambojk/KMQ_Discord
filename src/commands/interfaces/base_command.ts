@@ -48,4 +48,5 @@ export default interface BaseCommand {
         checkFn: (precheckArgs: PrecheckArgs) => boolean | Promise<boolean>;
         errorMessage?: string;
     }>;
+    slashCommands?: () => Array<Eris.ApplicationCommandStructure>;
 }

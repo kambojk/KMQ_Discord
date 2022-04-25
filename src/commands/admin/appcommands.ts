@@ -73,6 +73,15 @@ export default class AppCommandsCommand implements BaseCommand {
                     name: PROFILE_COMMAND_NAME,
                     type: Eris.Constants.ApplicationCommandTypes.USER,
                 });
+
+                for (const command of Object.values(state.client.commands)) {
+                    if (command.slashCommands) {
+                        const commands = command.slashCommands();
+                        for (const cmd of commands) {
+                            debugServer.createCommand(cmd);
+                        }
+                    }
+                }
             }
 
             sendInfoMessage(MessageContext.fromMessage(message), {
@@ -83,7 +92,7 @@ export default class AppCommandsCommand implements BaseCommand {
             const commands = await state.client.getCommands();
             for (const command of commands) {
                 logger.info(
-                    `Deleting global application command: ${command.id}`
+                    `Deleting global application command: ${command.name} -- ${command.id}`
                 );
                 await state.client.deleteCommand(command.id);
             }
